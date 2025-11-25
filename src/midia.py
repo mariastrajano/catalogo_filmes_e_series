@@ -2,7 +2,7 @@ class Midia:
     """
     Classe base para representar qualquer mídia (filme ou série).
     """
-    def __init__(self, titulo, tipo, genero, ano, duracao, classificacao_indicativa, elenco, status):
+    def __init__(self, titulo, tipo, genero, ano, duracao, classificacao_indicativa, elenco, data_lancamento, status):
         self.titulo = titulo
         self.tipo = tipo
         self.genero = genero
@@ -10,26 +10,8 @@ class Midia:
         self.duracao = duracao
         self.classificacao_indicativa = classificacao_indicativa
         self.elenco = elenco
+        self.data_lancamento = data_lancamento
         self.status = "NÃO ASSISTIDO"
-
- # Métodos
-    
-    def atualizar_status(self, status):
-        lista_status = ["NÃO ASSISTIDO", "ASSISTINDO", "ASSISTIDO"]
-        if status not in lista_status:
-            print("Digite um status válido.")
-        else:
-            self.status = status
-
-# Métodos Especiais
-
-    def __str__(self):
-        return f"{self.titulo} ({self.tipo}) - {self.ano}"
-
-    def __eq__(self, outro):
-        if not isinstance(outro, Midia):
-            return NotImplemented
-        return self.titulo == outro.titulo and self.tipo == outro.tipo and self.ano == outro.ano
 
 # Encapsulamento
 
@@ -54,3 +36,22 @@ class Midia:
             print("Duração deve ser maior que zero.")
         else:
             self._duracao = duracao
+            
+ # Métodos
+    
+    def atualizar_status(self, status):
+        lista_status = ["NÃO ASSISTIDO", "ASSISTINDO", "ASSISTIDO"]
+        if status not in lista_status:
+            print("Digite um status válido.")
+        else:
+            self.status = status
+
+# Métodos Especiais
+
+    def __str__(self):
+        return f"{self.titulo} ({self.tipo}) - {self.ano}"
+
+    def __eq__(self, outro):
+        if not isinstance(outro, Midia):
+            return NotImplemented
+        return self.titulo == outro.titulo and self.tipo == outro.tipo and self.ano == outro.ano

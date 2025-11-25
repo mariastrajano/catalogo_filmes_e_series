@@ -5,8 +5,8 @@ class Filme(Midia):
     Representa um filme no catálogo.
     Herda comportamento e atributos da classe Midia.
     """
-    def __init__(self, titulo, tipo, genero, ano, duracao, classificacao_indicativa, elenco, status, nota):
-        super().__init__(titulo, "FILME", genero, ano, duracao, classificacao_indicativa, elenco, status)
+    def __init__(self, titulo, tipo, genero, ano, duracao, classificacao_indicativa, elenco, data_lancamento, status, nota):
+        super().__init__(titulo, "FILME", genero, ano, duracao, classificacao_indicativa, elenco, data_lancamento, status)
         self.nota = nota
 
 # Encapsulamento
