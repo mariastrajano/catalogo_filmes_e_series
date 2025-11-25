@@ -2,7 +2,7 @@ class Midia:
     """
     Classe base para representar qualquer mídia (filme ou série).
     """
-    def __init__(self, titulo, tipo, genero, ano, duracao, classificacao_indicativa, elenco, data_lancamento, status):
+    def __init__(self, titulo, tipo, genero, ano, duracao, classificacao_indicativa, elenco, status):
         self.titulo = titulo
         self.tipo = tipo
         self.genero = genero
@@ -10,7 +10,6 @@ class Midia:
         self.duracao = duracao
         self.classificacao_indicativa = classificacao_indicativa
         self.elenco = elenco
-        self.data_lancamento = data_lancamento
         self.status = "NÃO ASSISTIDO"
 
 # Encapsulamento
@@ -22,7 +21,7 @@ class Midia:
     @titulo.setter
     def titulo(self, titulo):
         if titulo == "":
-            print("Título não pode ser vazio.")
+            raise ValueError("Título não pode ser vazio.")
         else:
             self._titulo = titulo
 
@@ -33,10 +32,10 @@ class Midia:
     @duracao.setter
     def duracao(self, duracao):
         if duracao <= 0:
-            print("Duração deve ser maior que zero.")
+            raise ValueError("Duração deve ser maior que zero.")
         else:
             self._duracao = duracao
-            
+
  # Métodos
     
     def atualizar_status(self, status):

@@ -18,10 +18,10 @@ class Episodio:
     @nota.setter
     def nota(self, nota):
         if nota < 0 or nota > 10:
-            print("A nota deve ser entre 0 e 10.")
+            raise ValueError("A nota deve ser entre 0 e 10.")
         else:
             self._nota = nota
-            
+
 # Métodos
  
     def atualizar_status(self, status):
