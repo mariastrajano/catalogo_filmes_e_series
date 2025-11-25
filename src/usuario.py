@@ -4,4 +4,3 @@ class Usuario:
     Gerencia listas personalizadas e histórico.
     """
     pass
-    
