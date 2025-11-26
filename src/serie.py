@@ -1,26 +1,26 @@
-from midia import Midia
+from src.midia import Midia
 
 class Serie(Midia):
     """
     Representa uma série no catálogo.
     Herda comportamento e atributos da classe Midia.
     """
-    def __init__(self, titulo, tipo, genero, ano, duracao, classificacao_indicativa, elenco, status, temporada):
-        super().__init__(titulo, "SERIE", genero, ano, duracao, classificacao_indicativa, elenco, status)
-        self.temporada = temporada
+    def __init__(self, titulo, tipo, genero, ano, classificacao_indicativa, elenco, status, temporadas):
+        super().__init__(titulo, "SERIE", genero, ano, classificacao_indicativa, elenco, status)
+        self.temporadas = temporadas
 
     # Encapsulamento
 
     @property
-    def temporada(self):
-        return self._temporada
+    def temporadas(self):
+        return self._temporadas
 
-    @temporada.setter
-    def temporada(self, temporada):
-        if temporada <= 0:
+    @temporadas.setter
+    def temporadas(self, temporadas):
+        if temporadas <= 0:
             raise ValueError("Número de temporadas deve ser positivo.")
         else:
-            self._temporada = temporada
+            self._temporadas = temporadas
 
     # Métodos (ainda não implementados pois precisam da classe Temporada para funcionar)
 

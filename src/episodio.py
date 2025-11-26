@@ -6,8 +6,8 @@ class Episodio:
         self.numero = numero
         self.titulo = titulo
         self.duracao = duracao
-        self.status = "NÃO ASSISTIDO"
-        self.nota = None
+        self.status = status
+        self.nota = nota
 
 # Encapsulamento
 
@@ -21,6 +21,17 @@ class Episodio:
             raise ValueError("A nota deve ser entre 0 e 10.")
         else:
             self._nota = nota
+
+    @property
+    def duracao(self):
+        return self._duracao
+
+    @duracao.setter
+    def duracao(self, duracao):
+        if duracao <= 0:
+            raise ValueError("Duração deve ser maior que zero.")
+        else:
+            self._duracao = duracao
 
 # Métodos
  

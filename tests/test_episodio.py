@@ -14,3 +14,7 @@ def test_episodio_criacao():
 def test_episodio_nota_invalida():
     with pytest.raises(ValueError):
         Episodio(1, "Piloto", 50, "ASSISTIDO", 100)
+
+def test_episodio_duracao_invalida():
+    with pytest.raises(ValueError):
+        Episodio(1, "Piloto", -50, "ASSISTIDO", 10)

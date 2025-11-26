@@ -1,12 +1,13 @@
-from midia import Midia
+from src.midia import Midia
 
 class Filme(Midia):
     """
     Representa um filme no catálogo.
     Herda comportamento e atributos da classe Midia.
     """
-    def __init__(self, titulo, tipo, genero, ano, duracao, classificacao_indicativa, elenco, status, nota):
-        super().__init__(titulo, "FILME", genero, ano, duracao, classificacao_indicativa, elenco, status)
+    def __init__(self, titulo, tipo, genero, ano, classificacao_indicativa, elenco, status, duracao, nota):
+        super().__init__(titulo, "FILME", genero, ano, classificacao_indicativa, elenco, status)
+        self.duracao = duracao
         self.nota = nota
 
 # Encapsulamento
@@ -21,3 +22,14 @@ class Filme(Midia):
             raise ValueError("A nota deve ser entre 0 e 10.")
         else:
             self._nota = nota
+
+    @property
+    def duracao(self):
+        return self._duracao
+
+    @duracao.setter
+    def duracao(self, duracao):
+        if duracao <= 0:
+            raise ValueError("Duração deve ser maior que zero.")
+        else:
+            self._duracao = duracao
