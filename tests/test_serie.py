@@ -6,9 +6,10 @@ from src.serie import Serie
 '''
 
 def test_serie_criacao():
-    s = Serie("Dark", "Série", "Mistério", 2017, 18, "Louis Hofmann, Oliver Masucci e Jördis Triebel", "ASSISTIDO", 3)
-    assert s.temporadas == 3
+    s = Serie("Dark", "Série", "Mistério", 2017, 18, "Louis Hofmann, Oliver Masucci e Jördis Triebel", "ASSISTIDO")
+    assert s.titulo == "Dark"
 
 def test_serie_temporadas_invalidas():
     with pytest.raises(ValueError):
-        Serie("Dark", "Série", "Mistério", 2017, 18, "Louis Hofmann, Oliver Masucci e Jördis Triebel", "ASSISTIDO", 0)
+        s = Serie("Dark", "Série", "Mistério", 2017, 18, "Louis Hofmann, Oliver Masucci e Jördis Triebel", "ASSISTIDO")
+        s.adicionar_temporadas(-3)

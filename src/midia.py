@@ -8,7 +8,7 @@ class Midia:
         self.genero = genero
         self.ano = ano
         self.classificacao_indicativa = classificacao_indicativa
-        self.elenco = elenco
+        self.elenco = []
         self.status = status
 
 # Encapsulamento
@@ -23,7 +23,6 @@ class Midia:
             raise ValueError("Título não pode ser vazio.")
         else:
             self._titulo = titulo
-
 
  # Métodos
     

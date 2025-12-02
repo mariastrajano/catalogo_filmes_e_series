@@ -12,6 +12,17 @@ class Episodio:
 # Encapsulamento
 
     @property
+    def numero(self):
+        return self._numero
+
+    @numero.setter
+    def numero(self, numero):
+        if numero <= 0:
+            raise ValueError("Número de episódios deve ser positivo.")
+        else:
+            self._numero = numero
+
+    @property
     def nota(self):
         return self._nota
 
