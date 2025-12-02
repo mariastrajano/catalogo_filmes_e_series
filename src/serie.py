@@ -6,8 +6,8 @@ class Serie(Midia):
     Representa uma série no catálogo.
     Herda comportamento e atributos da classe Midia.
     """
-    def __init__(self, titulo, tipo, genero, ano, classificacao_indicativa, elenco, status):
-        super().__init__(titulo, "SERIE", genero, ano, classificacao_indicativa, elenco, status)
+    def __init__(self, titulo, tipo, genero, ano, classificacao, elenco, status):
+        super().__init__(titulo, "SERIE", genero, ano, classificacao, elenco, status)
         self.temporadas = []
 
 # Métodos

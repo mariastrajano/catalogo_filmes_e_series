@@ -2,12 +2,12 @@ class Midia:
     """
     Classe base para representar qualquer mídia (filme ou série).
     """
-    def __init__(self, titulo, tipo, genero, ano, classificacao_indicativa, elenco, status):
+    def __init__(self, titulo, tipo, genero, ano, classificacao, elenco, status):
         self.titulo = titulo
         self.tipo = tipo
         self.genero = genero
         self.ano = ano
-        self.classificacao_indicativa = classificacao_indicativa
+        self.classificacao = classificacao
         self.elenco = []
         self.status = status
 
