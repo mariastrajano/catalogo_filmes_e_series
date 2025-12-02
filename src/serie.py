@@ -10,14 +10,14 @@ class Serie(Midia):
         super().__init__(titulo, "SERIE", genero, ano, classificacao_indicativa, elenco, status)
         self.temporadas = []
 
-    # Métodos
+# Métodos
 
     def adicionar_temporadas(self, numero):
         temporada = Temporada(numero)
         self.temporadas.append(temporada)
 
-    def total_episodios():
-        pass
+    def total_episodios(self):
+        return sum(len(temporada) for temporada in self.temporadas)
 
     def episodios_assistidos():
         pass
@@ -27,3 +27,11 @@ class Serie(Midia):
 
     def media_nota():
         pass
+
+# Métodos Especiais
+
+    def __len__(self):
+        return len(self.temporadas)
+    
+    def __repr__(self):
+        return f"Serie {self.titulo} ({len(self.temporadas)} temporadas)"

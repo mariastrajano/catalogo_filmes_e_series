@@ -52,3 +52,8 @@ class Episodio:
             print("Digite um status válido.")
         else:
             self.status = status
+
+# Métodos Especiais
+
+    def __str__(self):
+        return f"Ep {self.numero}: {self.titulo} ({self.duracao} min)"

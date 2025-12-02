@@ -10,6 +10,7 @@ class Temporada:
         self.episodios = []
 
 # Encapsulamento
+
     @property
     def numero(self):
         return self._numero
@@ -23,7 +24,7 @@ class Temporada:
     
 # Métodos
 
-    def adicionar_episodio(self):
+    def adicionar_episodios(self):
         while True:
             os.system('cls' if os.name == 'nt' else 'clear')
             print("NOVO EPISÓDIOS")
@@ -40,11 +41,16 @@ class Temporada:
             resp = input("Deseja adicionar outra episódio? (S/N) ").upper()
             if resp == "N": 
                 break
-
-    def total_episodios(self):
-        return sum(+ 1 for episodio in self.episodios)
     
     def listar_episodios(self):
-        print(f"TEMPORADA {self.numero}: ")
+        print(f"Temporada {self.numero}")
         for episodio in self.episodios:
-            print(f"{episodio.numero} - {episodio.titulo}")
+            print(str(episodio))
+    
+    def media_notas(self):
+        return sum(episodio.nota for episodio in self.episodios) / len(self)
+
+# Métodos Especiais
+
+    def __len__(self):
+        return len(self.episodios)
