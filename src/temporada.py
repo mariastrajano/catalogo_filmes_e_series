@@ -26,12 +26,12 @@ class Temporada:
     def adicionar_episodios(self, numero):
         
         for i in range(1,numero+1):
+            print("--------------")
             print(f"EPISÓDIO {i}")
             titulo = input("Título: ").upper()
             duracao = int(input("Duração (em mim): "))
             status = input("Status: ").upper()
             nota = float(input("Nota: "))
-            print("--------------")
 
             episodio = Episodio(i, titulo, duracao, status, nota)
             self.episodios.append(episodio)
@@ -41,8 +41,14 @@ class Temporada:
         for episodio in self.episodios:
             print(str(episodio))
     
-    def media_notas(self):
-        return sum(episodio.nota for episodio in self.episodios) / len(self)
+    def total_notas(self):
+        return sum(episodio.nota for episodio in self.episodios)
+    
+    def episodios_assistidos(self):
+        for episodio in self.episodios:
+            if episodio.status == "ASSISTIDO":
+                return True
+                
 
 # Métodos Especiais
 

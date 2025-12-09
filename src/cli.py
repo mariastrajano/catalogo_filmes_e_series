@@ -7,9 +7,6 @@ class Cli():
     Interface de linha de comando da aplicação.
     """
 
-    def __init__(self):
-        self.midias = []
-
     def adicionar_midia(self):
         while True:
             os.system('cls' if os.name == 'nt' else 'clear')
@@ -26,13 +23,10 @@ class Cli():
             if tipo == "FILME":
                 duracao = int(input("Duração (em min): "))
                 nota = float(input("Nota: "))
-                filme = Filme(titulo, "FILME", genero, ano, classificacao, elenco, status, duracao, nota)
-                
-                self.midias.append(filme)
+                filme = Filme(titulo, "FILME", genero, ano, duracao, classificacao, elenco, status, nota)
 
             else:
-                serie = Serie(titulo, "SERIE", genero, ano, classificacao, elenco, status)
-                self.midias.append(serie)
+                serie = Serie(titulo, "SERIE", genero, ano, classificacao, elenco, status, None)
 
                 temporadas = int(input("Quantidade de Temporadas: "))
 

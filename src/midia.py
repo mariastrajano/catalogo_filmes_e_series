@@ -24,15 +24,6 @@ class Midia:
         else:
             self._titulo = titulo
 
- # Métodos
-    
-    def atualizar_status(self, status):
-        lista_status = ["NÃO ASSISTIDO", "ASSISTINDO", "ASSISTIDO"]
-        if status not in lista_status:
-            print("Digite um status válido.")
-        else:
-            self.status = status
-
 # Métodos Especiais
 
     def __str__(self):
