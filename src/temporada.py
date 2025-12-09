@@ -1,4 +1,3 @@
-import os
 from src.episodio import Episodio
 
 class Temporada:
@@ -24,23 +23,18 @@ class Temporada:
     
 # Métodos
 
-    def adicionar_episodios(self):
-        while True:
-            os.system('cls' if os.name == 'nt' else 'clear')
-            print("NOVO EPISÓDIOS")
-            
-            numero = int(input("Número: "))
+    def adicionar_episodios(self, numero):
+        
+        for i in range(1,numero+1):
+            print(f"EPISÓDIO {i}")
             titulo = input("Título: ").upper()
             duracao = int(input("Duração (em mim): "))
             status = input("Status: ").upper()
             nota = float(input("Nota: "))
+            print("--------------")
 
-            episodio = Episodio(numero, titulo, duracao, status, nota)
+            episodio = Episodio(i, titulo, duracao, status, nota)
             self.episodios.append(episodio)
-
-            resp = input("Deseja adicionar outra episódio? (S/N) ").upper()
-            if resp == "N": 
-                break
     
     def listar_episodios(self):
         print(f"Temporada {self.numero}")

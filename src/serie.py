@@ -13,9 +13,16 @@ class Serie(Midia):
 # Métodos
 
     def adicionar_temporadas(self, numero):
-        temporada = Temporada(numero)
-        self.temporadas.append(temporada)
+        print(f"{self.titulo} - Temporada {numero}")
+        for i in range(1,numero+1):
+            temporada = Temporada(i)
 
+            episodios = int(input(f"Quantidade de episódios: "))
+            print("------------------------")
+            temporada.adicionar_episodios(episodios)
+
+            self.temporadas.append(temporada)
+            
     def total_episodios(self):
         return sum(len(temporada) for temporada in self.temporadas)
 
@@ -25,7 +32,7 @@ class Serie(Midia):
     def atualizar_status():
         pass
 
-    def media_nota():
+    def media_nota(self):
         pass
 
 # Métodos Especiais

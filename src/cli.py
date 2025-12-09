@@ -1,16 +1,47 @@
 import os
+from src.filme import Filme
+from src.serie import Serie
 
-"""
-Interface de linha de comando da aplicação.
-"""
+class Cli():
+    """
+    Interface de linha de comando da aplicação.
+    """
 
-resp = 0
+    def __init__(self):
+        self.midias = []
 
-while resp != 5:
-    os.system('cls' if os.name == 'nt' else 'clear')
+    def adicionar_midia(self):
+        while True:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print("---NOVA MÍDIA---")
 
-    print("CATÁLOGO DE FILMES E SÉRIES")
-    print("[1] Registro de Mídias \n[2] Listas Personalizadas \n[3] Histórico \n[4] Relatórios \n[5] Sair")
+            titulo = input("Título: ").upper()
+            tipo = input("Tipo (Filme ou Série): ").upper()
+            genero = input("Gênero: ").upper()
+            ano = int(input("Ano de Lançamento: "))
+            classificacao = input("Classificação Indicativa (L, 10, 12, 14, 16 ou 18): ").upper()
+            elenco = input("Elenco: ").upper()
+            status = input("Status (NÃO ASSISTIDO, ASSISTINDO OU ASSISTIDO): ").upper()
 
-    resp = int(input("Selecione uma opção: "))
-    os.system('cls' if os.name == 'nt' else 'clear')
+            if tipo == "FILME":
+                duracao = int(input("Duração (em min): "))
+                nota = float(input("Nota: "))
+                filme = Filme(titulo, "FILME", genero, ano, classificacao, elenco, status, duracao, nota)
+                
+                self.midias.append(filme)
+
+            else:
+                serie = Serie(titulo, "SERIE", genero, ano, classificacao, elenco, status)
+                self.midias.append(serie)
+
+                temporadas = int(input("Quantidade de Temporadas: "))
+
+                os.system('cls' if os.name == 'nt' else 'clear')
+                serie.adicionar_temporadas(temporadas)
+
+
+            resp = input("Deseja adicionar outra mídia? (S/N) ").upper()
+            if resp == "N": 
+                break
+
+            os.system('cls' if os.name == 'nt' else 'clear')
