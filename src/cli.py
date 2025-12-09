@@ -26,13 +26,15 @@ class Cli():
                 filme = Filme(titulo, "FILME", genero, ano, duracao, classificacao, elenco, status, nota)
 
             else:
-                serie = Serie(titulo, "SERIE", genero, ano, classificacao, elenco, status, None)
+                serie = Serie(titulo, "SERIE", genero, ano, 1, classificacao, elenco, status, 1)
 
                 temporadas = int(input("Quantidade de Temporadas: "))
-
                 os.system('cls' if os.name == 'nt' else 'clear')
                 serie.adicionar_temporadas(temporadas)
-
+                
+                serie.set_duracao()
+                serie.set_status()
+                serie.set_nota()
 
             resp = input("Deseja adicionar outra mídia? (S/N) ").upper()
             if resp == "N": 

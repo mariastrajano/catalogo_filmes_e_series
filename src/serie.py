@@ -7,10 +7,22 @@ class Serie(Midia):
     Representa uma série no catálogo.
     Herda comportamento e atributos da classe Midia.
     """
-    def __init__(self, titulo, tipo, genero, ano, classificacao, elenco, status, nota):
-        super().__init__(titulo, "SÉRIE", genero, ano, classificacao, elenco, status)
-        self.nota = nota
+    def __init__(self, titulo, tipo, genero, ano, duracao, classificacao, elenco, status, nota):
+        super().__init__(titulo, "SERIE", genero, ano, duracao, classificacao, elenco, status, nota)
         self.temporadas = []
+
+# Encapsulamento
+
+    def set_duracao(self):
+        self._duracao = sum(temporada.duracao() for temporada in self.temporadas)
+
+    def set_status(self):
+        for temporada in self.temporadas:
+            if temporada.episodios_assistidos() == True:
+                self._status == "ASSISTIDO"
+
+    def set_nota(self):
+        self._nota = sum(temporada.total_notas() for temporada in self.temporadas) / self.total_episodios()
 
 # Métodos
 
@@ -26,19 +38,12 @@ class Serie(Midia):
             self.temporadas.append(temporada)
 
             temporada.adicionar_episodios(episodios)
-            
+
     def total_episodios(self):
         return sum(len(temporada) for temporada in self.temporadas)
 
-    def status_automatico(self):
-        for temporada in self.temporadas:
-            if temporada.episodios_assistidos() == True:
-                self.status == "ASSISTIDO"
-
-    def media_notas(self):
-        self.nota = sum(temporada.total_notas() for temporada in self.temporadas) / self.total_episodios()
-    
-# Métodos Especiais
+        
+# Métodos Especiaisdef duracao(self):
 
     def __len__(self):
         return len(self.temporadas)

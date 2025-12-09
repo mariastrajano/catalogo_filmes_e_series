@@ -2,14 +2,16 @@ class Midia:
     """
     Classe base para representar qualquer mídia (filme ou série).
     """
-    def __init__(self, titulo, tipo, genero, ano, classificacao, elenco, status):
+    def __init__(self, titulo, tipo, genero, ano, duracao, classificacao, elenco, status, nota):
         self.titulo = titulo
         self.tipo = tipo
         self.genero = genero
         self.ano = ano
+        self.duracao = duracao
         self.classificacao = classificacao
-        self.elenco = []
+        self.elenco = elenco
         self.status = status
+        self.nota = nota
 
 # Encapsulamento
 
@@ -23,6 +25,39 @@ class Midia:
             raise ValueError("Título não pode ser vazio.")
         else:
             self._titulo = titulo
+
+    @property
+    def duracao(self):
+        return self._duracao
+
+    @duracao.setter
+    def duracao(self, duracao):
+        if duracao <= 0:
+            raise ValueError("Duração deve ser maior que zero.")
+        else:
+            self._duracao = duracao
+
+    @property
+    def status(self):
+        return self._status
+
+    @status.setter
+    def status(self, status):
+        if status not in ["NÃO ASSISTIDO", "ASSISTINDO", "ASSISTIDO"]:
+            raise ValueError("Status inválido!")
+        else:
+            self._status = status
+
+    @property
+    def nota(self):
+        return self._nota
+
+    @nota.setter
+    def nota(self, nota):
+        if nota < 0 or nota > 10:
+            raise ValueError("A nota deve ser entre 0 e 10.")
+        else:
+            self._nota = nota
 
 # Métodos Especiais
 

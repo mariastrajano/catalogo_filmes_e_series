@@ -48,7 +48,11 @@ class Temporada:
         for episodio in self.episodios:
             if episodio.status == "ASSISTIDO":
                 return True
+            else:
+                return False
                 
+    def duracao(self):
+        return sum(episodio.duracao for episodio in self.episodios)
 
 # Métodos Especiais
 
