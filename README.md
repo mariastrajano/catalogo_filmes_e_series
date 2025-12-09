@@ -1,7 +1,7 @@
 
 # **Catálogo de Filmes e Séries**
 
-![Status](https://img.shields.io/badge/Projeto-Semana%201-blue)
+![Status](https://img.shields.io/badge/Projeto-Semana%204-blue)
 ![Python](https://img.shields.io/badge/Python-3.11+-yellow)
 
 Este projeto é um sistema interativo para gerenciamento de filmes e séries! Aqui você encontrará todas as informações sobre o catálogo, suas funcionalidades, as tecnologias utilizadas e como executá-lo em seu ambiente local.
