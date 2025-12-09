@@ -1,8 +1,10 @@
+import datetime
+
 class Midia:
     """
     Classe base para representar qualquer mídia (filme ou série).
     """
-    def __init__(self, titulo, tipo, genero, ano, duracao, classificacao, elenco, status, nota):
+    def __init__(self, titulo, tipo, genero, ano, duracao, classificacao, elenco, status, nota, data_conclusao):
         self.titulo = titulo
         self.tipo = tipo
         self.genero = genero
@@ -12,6 +14,7 @@ class Midia:
         self.elenco = elenco
         self.status = status
         self.nota = nota
+        self.data_conclusao = data_conclusao
 
 # Encapsulamento
 
@@ -59,6 +62,17 @@ class Midia:
         else:
             self._nota = nota
 
+    @property
+    def data_conclusao(self):
+        return self._data_conclusao
+
+    @data_conclusao.setter
+    def data_conclusao(self, data_conclusao):
+        if self._status == "ASSISTIDO":
+            self._data_conclusao = datetime.date.today().isoformat()
+        else:
+            self._data_conclusao = data_conclusao
+        
 # Métodos Especiais
 
     def __str__(self):

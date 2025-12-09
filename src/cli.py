@@ -23,15 +23,15 @@ class Cli():
             if tipo == "FILME":
                 duracao = int(input("Duração (em min): "))
                 nota = float(input("Nota: "))
-                filme = Filme(titulo, "FILME", genero, ano, duracao, classificacao, elenco, status, nota)
-
+                filme = Filme(titulo, "FILME", genero, ano, duracao, classificacao, elenco, status, nota, 1)
+                
             else:
-                serie = Serie(titulo, "SERIE", genero, ano, 1, classificacao, elenco, status, 1)
+                serie = Serie(titulo, "SERIE", genero, ano, 1, classificacao, elenco, status, 1, 1)
 
                 temporadas = int(input("Quantidade de Temporadas: "))
                 os.system('cls' if os.name == 'nt' else 'clear')
                 serie.adicionar_temporadas(temporadas)
-                
+
                 serie.set_duracao()
                 serie.set_status()
                 serie.set_nota()

@@ -1,21 +1,28 @@
 import pytest
 from src.midia import Midia
 
-'''
-    SEMANA 2
-'''
-
 def test_criacao_midia():
-    m = Midia("Jogos Vorazes", "Filme", "Ação", 2012, 14, "Jennifer Lawrence, Josh Hutcherson e Liam Hemsworth", "NÃO ASSISTIDO")
+    m = Midia("Jogos Vorazes", "Filme", "Ação", 2012, 142, 14, "Jennifer Lawrence, Josh Hutcherson e Liam Hemsworth", "ASSISTINDO", 10, "2025-09-21")
     assert m.titulo == "Jogos Vorazes"
-    assert m.genero == "Ação"
-    assert m.ano == 2012
+    assert m.duracao == 142
 
 def test_titulo_vazio():
     with pytest.raises(ValueError):
-        Midia("", "Filme", "Ação", 2012, 14, "Jennifer Lawrence, Josh Hutcherson e Liam Hemsworth","NÃO ASSISTIDO")
+        Midia("", "Filme", "Ação", 2012, 142, 14, "Jennifer Lawrence, Josh Hutcherson e Liam Hemsworth", "ASSISTINDO", 10, "2025-09-21")
+
+def test_duracao_invalida():
+    with pytest.raises(ValueError):
+        Midia("Dark", "Série", "Mistério", 2017, -19, 18, "Louis Hofmann, Oliver Masucci e Jördis Triebel", "ASSISTIDO", 9.6, "2025-12-09")
+
+def test_status_invalido():
+    with pytest.raises(ValueError):
+        Midia("Dark", "Série", "Mistério", 2017, 160, 18, "Louis Hofmann, Oliver Masucci e Jördis Triebel", "JÁ ASSISTI", 9.6, "2025-12-09")
+
+def test_nota_invalida():
+    with pytest.raises(ValueError):
+        Midia("Jogos Vorazes", "Filme", "Ação", 2012, 142, 14, "Jennifer Lawrence, Josh Hutcherson e Liam Hemsworth", "ASSISTINDO", -10, "2025-09-21")
 
 def test_midia_eq():
-    m1 = Midia("Jogos Vorazes", "Filme", "Ação", 2012, 14, "Jennifer Lawrence, Josh Hutcherson e Liam Hemsworth", "NÃO ASSISTIDO")
-    m2 = Midia("Jogos Vorazes", "Filme", "Ação", 2012, 14, "Jennifer Lawrence, Josh Hutcherson e Liam Hemsworth", "NÃO ASSISTIDO")
+    m1 = Midia("Dark", "Série", "Mistério", 2017, 160, 18, "Louis Hofmann, Oliver Masucci e Jördis Triebel", "ASSISTIDO", 9.6, "2025-12-09")
+    m2 = Midia("Dark", "Série", "Mistério", 2017, 160, 18, "Louis Hofmann, Oliver Masucci e Jördis Triebel", "ASSISTIDO", 9.6, "2025-12-09")
     assert m1 == m2

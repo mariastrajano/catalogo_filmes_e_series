@@ -17,7 +17,7 @@ class Temporada:
     @numero.setter
     def numero(self, numero):
         if numero <= 0:
-            raise ValueError("Número de episódios deve ser positivo.")
+            raise ValueError("Número de temporadas deve ser positivo.")
         else:
             self._numero = numero
     
@@ -45,11 +45,12 @@ class Temporada:
         return sum(episodio.nota for episodio in self.episodios)
     
     def episodios_assistidos(self):
+        ep_assistidos = 0
         for episodio in self.episodios:
             if episodio.status == "ASSISTIDO":
-                return True
-            else:
-                return False
+                ep_assistidos += 1
+        if ep_assistidos == len(self):
+            return True
                 
     def duracao(self):
         return sum(episodio.duracao for episodio in self.episodios)

@@ -1,4 +1,5 @@
 import os
+import datetime
 from src.midia import Midia
 from src.temporada import Temporada
 
@@ -7,8 +8,8 @@ class Serie(Midia):
     Representa uma série no catálogo.
     Herda comportamento e atributos da classe Midia.
     """
-    def __init__(self, titulo, tipo, genero, ano, duracao, classificacao, elenco, status, nota):
-        super().__init__(titulo, "SERIE", genero, ano, duracao, classificacao, elenco, status, nota)
+    def __init__(self, titulo, tipo, genero, ano, duracao, classificacao, elenco, status, nota, data_conclusao):
+        super().__init__(titulo, "SERIE", genero, ano, duracao, classificacao, elenco, status, nota, data_conclusao)
         self.temporadas = []
 
 # Encapsulamento
@@ -17,9 +18,14 @@ class Serie(Midia):
         self._duracao = sum(temporada.duracao() for temporada in self.temporadas)
 
     def set_status(self):
+        ep_assistidos = 0
         for temporada in self.temporadas:
             if temporada.episodios_assistidos() == True:
-                self._status == "ASSISTIDO"
+                ep_assistidos += 1
+                
+        if ep_assistidos == self.total_episodios():
+            self._status = "ASSISTIDO"
+            self._data_conclusao = datetime.date.today().isoformat()
 
     def set_nota(self):
         self._nota = sum(temporada.total_notas() for temporada in self.temporadas) / self.total_episodios()
@@ -27,7 +33,7 @@ class Serie(Midia):
 # Métodos
 
     def adicionar_temporadas(self, numero):
-        for i in range(1,numero+1):
+        for i in range(1, numero+1):
             os.system('cls' if os.name == 'nt' else 'clear')
             print(f"{self.titulo} - Temporada {i}")
             temporada = Temporada(i)
