@@ -1,5 +1,9 @@
 import datetime
 
+import sqlite3
+banco = sqlite3.connect('banco.db')
+cursor = banco.cursor()
+
 class Midia:
     """
     Classe base para representar qualquer mídia (filme ou série).
@@ -70,8 +74,18 @@ class Midia:
     def data_conclusao(self, data_conclusao):
         if self._status == "ASSISTIDO":
             self._data_conclusao = datetime.date.today().isoformat()
+
+            cursor.execute("UPDATE midias SET data_conclusao = '"+self._data_conclusao+"' WHERE titulo = '"+self.titulo+"'")
+            banco.commit()
+
         else:
-            self._data_conclusao = data_conclusao
+            self._data_conclusao = None
+
+# Métodos
+
+    def banco_de_dados(self):
+        cursor.execute("INSERT INTO midias VALUES ('"+self.titulo+"', '"+self.tipo+"', '"+self.genero+"', '"+str(self.ano)+"', '"+str(self.duracao)+"', '"+str(self.classificacao)+"', '"+self.elenco+"', '"+self.status+"', '"+str(self.nota)+"', '"+str(self.data_conclusao)+"')")
+        banco.commit()
         
 # Métodos Especiais
 
