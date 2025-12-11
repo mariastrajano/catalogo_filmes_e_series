@@ -1,14 +1,14 @@
 import pytest
-from src.midia import Midia
+from models.midia import Midia
 
 def test_criacao_midia():
-    m = Midia("Jogos Vorazes", "Filme", "Ação", 2012, 142, 14, "Jennifer Lawrence, Josh Hutcherson e Liam Hemsworth", "ASSISTINDO", 10, "2025-09-21")
+    m = Midia("Jogos Vorazes", "Filme", "Ação", 2012, 142, 14, "Jennifer Lawrence, Josh Hutcherson e Liam Hemsworth", "ASSISTIDO", 10, None)
     assert m.titulo == "Jogos Vorazes"
     assert m.duracao == 142
 
 def test_titulo_vazio():
     with pytest.raises(ValueError):
-        Midia("", "Filme", "Ação", 2012, 142, 14, "Jennifer Lawrence, Josh Hutcherson e Liam Hemsworth", "ASSISTINDO", 10, "2025-09-21")
+        Midia("", "Filme", "Ação", 2012, 142, 14, "Jennifer Lawrence, Josh Hutcherson e Liam Hemsworth", "ASSISTINDO", 10, None)
 
 def test_duracao_invalida():
     with pytest.raises(ValueError):
@@ -20,7 +20,7 @@ def test_status_invalido():
 
 def test_nota_invalida():
     with pytest.raises(ValueError):
-        Midia("Jogos Vorazes", "Filme", "Ação", 2012, 142, 14, "Jennifer Lawrence, Josh Hutcherson e Liam Hemsworth", "ASSISTINDO", -10, "2025-09-21")
+        Midia("Jogos Vorazes", "Filme", "Ação", 2012, 142, 14, "Jennifer Lawrence, Josh Hutcherson e Liam Hemsworth", "ASSISTINDO", -10, None)
 
 def test_midia_eq():
     m1 = Midia("Dark", "Série", "Mistério", 2017, 160, 18, "Louis Hofmann, Oliver Masucci e Jördis Triebel", "ASSISTIDO", 9.6, "2025-12-09")

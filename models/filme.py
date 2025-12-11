@@ -1,4 +1,4 @@
-from src.midia import Midia
+from models.midia import Midia
 
 class Filme(Midia):
     """
@@ -6,4 +6,4 @@ class Filme(Midia):
     Herda comportamento e atributos da classe Midia.
     """
     def __init__(self, titulo, tipo, genero, ano, duracao, classificacao, elenco, status, nota, data_conclusao):
-        super().__init__(titulo, "FILME", genero, ano, duracao, classificacao, elenco, status, nota, data_conclusao)
+        super().__init__(titulo, "Filme", genero, ano, duracao, classificacao, elenco, status, nota, data_conclusao)

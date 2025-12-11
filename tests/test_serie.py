@@ -1,5 +1,5 @@
 import pytest
-from src.serie import Serie
+from models.serie import Serie
 
 def test_serie_criacao():
     s = Serie("Dark", "Série", "Mistério", 2017, 160, 18, "Louis Hofmann, Oliver Masucci e Jördis Triebel", "ASSISTIDO", 9.6, "2025-12-09")

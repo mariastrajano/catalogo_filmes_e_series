@@ -1,5 +1,4 @@
 import datetime
-
 import sqlite3
 banco = sqlite3.connect('banco.db')
 cursor = banco.cursor()
@@ -39,7 +38,7 @@ class Midia:
 
     @duracao.setter
     def duracao(self, duracao):
-        if duracao <= 0:
+        if duracao < 0:
             raise ValueError("Duração deve ser maior que zero.")
         else:
             self._duracao = duracao
@@ -50,7 +49,7 @@ class Midia:
 
     @status.setter
     def status(self, status):
-        if status not in ["NÃO ASSISTIDO", "ASSISTINDO", "ASSISTIDO"]:
+        if status not in ["Não assistido", "Assistindo", "Assistido"]:
             raise ValueError("Status inválido!")
         else:
             self._status = status
@@ -72,8 +71,8 @@ class Midia:
 
     @data_conclusao.setter
     def data_conclusao(self, data_conclusao):
-        if self._status == "ASSISTIDO":
-            self._data_conclusao = datetime.date.today().isoformat()
+        if self._status == "Assistido":
+            self._data_conclusao = datetime.date.today().strftime("%d/%m/%Y")
 
             cursor.execute("UPDATE midias SET data_conclusao = '"+self._data_conclusao+"' WHERE titulo = '"+self.titulo+"'")
             banco.commit()
@@ -86,6 +85,13 @@ class Midia:
     def banco_de_dados(self):
         cursor.execute("INSERT INTO midias VALUES ('"+self.titulo+"', '"+self.tipo+"', '"+self.genero+"', '"+str(self.ano)+"', '"+str(self.duracao)+"', '"+str(self.classificacao)+"', '"+self.elenco+"', '"+self.status+"', '"+str(self.nota)+"', '"+str(self.data_conclusao)+"')")
         banco.commit()
+
+    def atualizar_status(self,status):
+        self.status = status
+
+        cursor.execute("UPDATE midias SET status = '"+self._status+"' WHERE titulo = '"+self.titulo+"'")
+        banco.commit()
+
         
 # Métodos Especiais
 

@@ -23,6 +23,17 @@ class Episodio:
             self._numero = numero
 
     @property
+    def status(self):
+        return self._status
+
+    @status.setter
+    def status(self, status):
+        if status not in ["Não assistido", "Assistindo", "Assistido"]:
+            raise ValueError("Status inválido!")
+        else:
+            self._status = status
+
+    @property
     def nota(self):
         return self._nota
 
@@ -43,15 +54,6 @@ class Episodio:
             raise ValueError("Duração deve ser maior que zero.")
         else:
             self._duracao = duracao
-
-# Métodos
- 
-    def atualizar_status(self, status):
-        lista_status = ["NÃO ASSISTIDO", "ASSISTINDO", "ASSISTIDO"]
-        if status not in lista_status:
-            print("Digite um status válido.")
-        else:
-            self.status = status
 
 # Métodos Especiais
 

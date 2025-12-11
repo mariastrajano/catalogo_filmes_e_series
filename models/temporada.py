@@ -1,4 +1,4 @@
-from src.episodio import Episodio
+from models.episodio import Episodio
 
 class Temporada:
     """
@@ -26,12 +26,16 @@ class Temporada:
     def adicionar_episodios(self, numero):
         
         for i in range(1,numero+1):
-            print("--------------")
+            print("-" * 10)
             print(f"EPISÓDIO {i}")
-            titulo = input("Título: ").upper()
+            titulo = input("Título: ").capitalize()
             duracao = int(input("Duração (em mim): "))
-            status = input("Status: ").upper()
-            nota = float(input("Nota: "))
+            status = input("Status (Não Assistido, Assistindo ou Assistido): ").capitalize()
+            
+            if status == "Assistido":
+                nota = float(input("Nota (0-10): "))
+            else:
+                nota = 0.0
 
             episodio = Episodio(i, titulo, duracao, status, nota)
             self.episodios.append(episodio)
@@ -47,7 +51,7 @@ class Temporada:
     def episodios_assistidos(self):
         ep_assistidos = 0
         for episodio in self.episodios:
-            if episodio.status == "ASSISTIDO":
+            if episodio.status == "Assistido":
                 ep_assistidos += 1
         if ep_assistidos == len(self):
             return True

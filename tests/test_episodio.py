@@ -1,5 +1,5 @@
 import pytest
-from src.episodio import Episodio
+from models.episodio import Episodio
 
 def test_episodio_criacao():
     e = Episodio(1, "Piloto", 50, "ASSISTIDO", 10)
