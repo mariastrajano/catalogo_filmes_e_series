@@ -28,6 +28,10 @@ class Serie(Midia):
             self.temporadas.append(temporada)
             temporada.adicionar_episodios(episodios)
 
+            self.status_automatico()
+            self.duracao_total()
+            self.nota_total()
+
     def total_episodios(self):
         return sum(len(temporada) for temporada in self.temporadas)
     

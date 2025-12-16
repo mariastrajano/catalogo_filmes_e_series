@@ -98,10 +98,6 @@ class Dados:
     def salvar_serie(self, serie):
         c = self.conn.cursor()
 
-        serie.status_automatico()
-        serie.duracao_total()
-        serie.nota_total()
-
         c.execute("""
         INSERT INTO midia (titulo, tipo, genero, ano, duracao, classificacao, elenco, status, nota, data_conclusao)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
