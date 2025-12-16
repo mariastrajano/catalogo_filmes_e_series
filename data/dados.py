@@ -12,7 +12,6 @@ class Dados:
         self.conn = sqlite3.connect('banco.db')
         self.conn.row_factory = sqlite3.Row
         self.criar_tabelas()
-        self.seed()
 
     def criar_tabelas(self):
         c = self.conn.cursor()
@@ -177,9 +176,9 @@ class Dados:
 
     def seed(self):
         midias_seed = [
-            ("Interestelar", "Filme", "Ficção", 2014, 169, 8.6, "Assistido", "2025-09-10"),
-            ("Dark", "Serie", "Drama", 2017, 1620, 9.0, "Assistido", "2025-09-05"),
-            ("Matrix", "Filme", "Ação", 1999, 136, 8.7, "Assistido", "2025-09-01")
+            ("Interestelar", "Filme", "Ficção", 2014, 169, 8.6, "Assistido", "2025-12-15"),
+            ("Dark", "Serie", "Drama", 2017, 1620, 9.0, "Assistido", "2025-12-05"),
+            ("Matrix", "Filme", "Ação", 1999, 136, 8.7, "Assistido", "2025-12-01")
         ]
 
         c = self.conn.cursor()
