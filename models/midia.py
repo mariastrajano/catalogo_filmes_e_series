@@ -1,11 +1,6 @@
-import datetime
-import sqlite3
-banco = sqlite3.connect('banco.db')
-cursor = banco.cursor()
-
 class Midia:
     """
-    Classe base para representar qualquer mídia (filme ou série).
+    Classe base para Filme e Série.
     """
     def __init__(self, titulo, tipo, genero, ano, duracao, classificacao, elenco, status, nota, data_conclusao):
         self.titulo = titulo
@@ -19,7 +14,9 @@ class Midia:
         self.nota = nota
         self.data_conclusao = data_conclusao
 
-# Encapsulamento
+    # -------------------
+    # ENCAPSULAMENTO
+    # -------------------
 
     @property
     def titulo(self):
@@ -64,41 +61,18 @@ class Midia:
             raise ValueError("A nota deve ser entre 0 e 10.")
         else:
             self._nota = nota
-
-    @property
-    def data_conclusao(self):
-        return self._data_conclusao
-
-    @data_conclusao.setter
-    def data_conclusao(self, data_conclusao):
-        if self._status == "Assistido":
-            self._data_conclusao = datetime.date.today().strftime("%d/%m/%Y")
-
-            cursor.execute("UPDATE midias SET data_conclusao = '"+self._data_conclusao+"' WHERE titulo = '"+self.titulo+"'")
-            banco.commit()
-
-        else:
-            self._data_conclusao = None
-
-# Métodos
-
-    def banco_de_dados(self):
-        cursor.execute("INSERT INTO midias VALUES ('"+self.titulo+"', '"+self.tipo+"', '"+self.genero+"', '"+str(self.ano)+"', '"+str(self.duracao)+"', '"+str(self.classificacao)+"', '"+self.elenco+"', '"+self.status+"', '"+str(self.nota)+"', '"+str(self.data_conclusao)+"')")
-        banco.commit()
-
-    def atualizar_status(self,status):
-        self.status = status
-
-        cursor.execute("UPDATE midias SET status = '"+self._status+"' WHERE titulo = '"+self.titulo+"'")
-        banco.commit()
-
-        
-# Métodos Especiais
+      
+    # -------------------
+    # MÉTODOS ESPECIAIS
+    # -------------------
 
     def __str__(self):
-        return f"{self.titulo} ({self.tipo}) - {self.ano}"
+        return f"{self.titulo} ({self.tipo}) - {self.ano} \n   Status: {self.status} \n   Nota: {self.nota}"
 
     def __eq__(self, outro):
         if not isinstance(outro, Midia):
             return NotImplemented
-        return self.titulo == outro.titulo and self.tipo == outro.tipo and self.ano == outro.ano
+        
+        return (self.titulo == outro.titulo and
+                self.tipo == outro.tipo and
+                self.ano == outro.ano)

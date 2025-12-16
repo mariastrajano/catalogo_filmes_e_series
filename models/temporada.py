@@ -8,7 +8,9 @@ class Temporada:
         self.numero = numero
         self.episodios = []
 
-# Encapsulamento
+    # -------------------
+    # ENCAPSULAMENTO
+    # -------------------
 
     @property
     def numero(self):
@@ -21,7 +23,9 @@ class Temporada:
         else:
             self._numero = numero
     
-# Métodos
+    # -------------------
+    # MÉTODOS
+    # -------------------
 
     def adicionar_episodios(self, numero):
         
@@ -40,26 +44,18 @@ class Temporada:
             episodio = Episodio(i, titulo, duracao, status, nota)
             self.episodios.append(episodio)
     
-    def listar_episodios(self):
-        print(f"Temporada {self.numero}")
-        for episodio in self.episodios:
-            print(str(episodio))
-    
     def total_notas(self):
         return sum(episodio.nota for episodio in self.episodios)
     
     def episodios_assistidos(self):
-        ep_assistidos = 0
-        for episodio in self.episodios:
-            if episodio.status == "Assistido":
-                ep_assistidos += 1
-        if ep_assistidos == len(self):
-            return True
+            return len([episodio for episodio in self.episodios if episodio.status == "Assistido"])
                 
     def duracao(self):
         return sum(episodio.duracao for episodio in self.episodios)
 
-# Métodos Especiais
+    # -------------------
+    # MÉTODOS ESPECIAIS
+    # -------------------
 
     def __len__(self):
         return len(self.episodios)

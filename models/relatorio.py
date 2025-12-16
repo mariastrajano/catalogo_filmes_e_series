@@ -1,23 +1,63 @@
 import os
 import sqlite3
-banco = sqlite3.connect('banco.db')
-cursor = banco.cursor()
+
+from config.settings import Settings
+s = Settings()
 
 class Relatorio:
     """
-    Gera relatórios com base em listas de mídias.
+    Gera relatórios com base no banco de dados.
     """
+    def __init__(self):
+        self.conn = sqlite3.connect('banco.db')
 
-    def media_nota_genero(self):
-        print("=== MÉDIA DAS NOTA POR GÊNERO ===")
-        cursor.execute("SELECT genero, AVG(nota) AS media_notas FROM midias GROUP BY genero")
+    def converter_para_horas(self, minutos):
+        return minutos * s.multiplicador_horas
+    
+    def media_notas_por_genero(self):
+        print("=== MÉDIA DAS NOTAS POR GÊNERO ===")
 
-        for row in cursor.fetchall():
-            print(f"{row[0]}: {row[1]}")
+        c = self.conn.cursor()
+        c.execute("""
+            SELECT genero, AVG(nota)
+            FROM midia
+            WHERE status = 'Assistido'
+            GROUP BY genero
+        """)
+
+        resultados = c.fetchall()
+
+        if not resultados:
+            print("Nenhuma avaliação encontrada.")
+        
+        else:
+            for genero, media in resultados:
+                print(f"{genero}: {media:.2f}")
 
         print("")
-        menu = input("Pressione Enter para continuar... ")
-        os.system('cls' if os.name == 'nt' else 'clear')
+
+    def tempo_total_assistido(self):
+        print("=== TEMPO TOTAL ASSISTIDO ===")
+
+        c = self.conn.cursor()
+        c.execute("""
+            SELECT tipo, SUM(duracao)
+            FROM midia
+            WHERE status = 'Assistido'
+            GROUP BY tipo
+        """)
+
+        resultados = c.fetchall()
+
+        if not resultados:
+            print("Nenhma mídia assistida encontrada")
+        
+        else:
+            for tipo, minutos in resultados:
+                horas = self.converter_para_horas(minutos)
+                print(f"{tipo}: {horas:.2f} horas")
+
+        print("")
 
     def top_10(self):
         print("=== TOP 10 ===")
@@ -26,43 +66,22 @@ class Relatorio:
         os.system('cls' if os.name == 'nt' else 'clear')
         print(f"=== TOP 10 - {tipo} ===")
 
-        top = cursor.execute("SELECT titulo, nota, status FROM midias WHERE status = 'Assistido' AND tipo = '"+tipo+"' ORDER BY nota DESC LIMIT 10")
-        result_top = top.fetchall()
+        c = self.conn.cursor()
+        c.execute("""
+            SELECT titulo, nota
+            FROM midia
+            WHERE status = 'Assistido' and tipo = ?
+            ORDER BY nota DESC
+            LIMIT 10
+        """, (tipo, ))
 
-        if result_top and result_top[0] is not None:
-            i = 0
-            for row in result_top:
-                i += 1
-                print(f"{i}. {row[0]} - {row[1]}")
+        resultados = c.fetchall()
 
-        else:
-            print("Nenhuma mídia assistida encontrado.")
+        if not resultados:
+            print("Nenhuma mídia assistida encontrada.")
+            return
 
-        print("")
-        menu = input("Pressione Enter para continuar... ")
-        os.system('cls' if os.name == 'nt' else 'clear')
-
-    def tempo_total_assistido(self):
-        print("=== TEMPO TOTAL ASSISTIDO ===")
-
-        f = cursor.execute("SELECT SUM(duracao) FROM midias WHERE status = 'Assistido' AND tipo = 'Filme'")
-        result_f = f.fetchone()
-
-        s = cursor.execute("SELECT SUM(duracao) FROM midias WHERE status = 'Assistido' AND tipo = 'Serie'")
-        result_s = s.fetchone()
-
-        if result_f and result_f[0] is not None:
-            duracao_f = result_f[0]
-            print(f"Filmes: {duracao_f} minutos.")
-        else:
-            print("Nenhum filme assistido encontrado.")
-
-        if result_s and result_s[0] is not None:
-            duracao_s = result_s[0]
-            print(f"Séries: {duracao_s} minutos.")
-        else:
-            print("Nenhuma série assistida encontrado.")
+        for i, (titulo, nota) in enumerate(resultados, 1):
+            print(f"{i}. {titulo} — {nota}")
 
         print("")
-        menu = input("Pressione Enter para continuar... ")
-        os.system('cls' if os.name == 'nt' else 'clear')

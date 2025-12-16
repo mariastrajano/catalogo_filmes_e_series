@@ -9,7 +9,9 @@ class Episodio:
         self.status = status
         self.nota = nota
 
-# Encapsulamento
+    # -------------------
+    # ENCAPSULAMENTO
+    # -------------------
 
     @property
     def numero(self):
@@ -54,8 +56,3 @@ class Episodio:
             raise ValueError("Duração deve ser maior que zero.")
         else:
             self._duracao = duracao
-
-# Métodos Especiais
-
-    def __str__(self):
-        return f"Ep {self.numero}: {self.titulo} ({self.duracao} min)"

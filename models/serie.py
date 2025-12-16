@@ -1,10 +1,7 @@
+import os
 import datetime
 from models.midia import Midia
 from models.temporada import Temporada
-
-import sqlite3
-banco = sqlite3.connect('banco.db')
-cursor = banco.cursor()
 
 class Serie(Midia):
     """
@@ -15,40 +12,14 @@ class Serie(Midia):
         super().__init__(titulo, "Serie", genero, ano, duracao, classificacao, elenco, status, nota, data_conclusao)
         self.temporadas = []
 
-# Encapsulamento
-
-    def set_duracao(self):
-        self._duracao = sum(temporada.duracao() for temporada in self.temporadas)
-
-        cursor.execute("UPDATE midias SET duracao = '"+str(self._duracao)+"' WHERE titulo = '"+self.titulo+"'")
-        banco.commit()
-
-    def set_status(self):
-        ep_assistidos = 0
-        for temporada in self.temporadas:
-            if temporada.episodios_assistidos() == True:
-                ep_assistidos += 1
-                
-        if ep_assistidos == self.total_episodios():
-            self._status = "Assistido"
-            self._data_conclusao = datetime.date.today().isoformat()
-
-            cursor.execute("UPDATE midias SET status = '"+self._status+"' WHERE titulo = '"+self.titulo+"'")
-            cursor.execute("UPDATE midias SET data_conclusao = '"+self._data_conclusao+"' WHERE titulo = '"+self.titulo+"'")
-            banco.commit()
-
-
-    def set_nota(self):
-        self._nota = sum(temporada.total_notas() for temporada in self.temporadas) / self.total_episodios()
-
-        cursor.execute("UPDATE midias SET nota = '"+str(self._nota)+"' WHERE titulo = '"+self.titulo+"'")
-        banco.commit()
-
-# Métodos
+    # -------------------
+    # MÉTODOS
+    # -------------------
 
     def adicionar_temporadas(self, numero):
 
         for i in range(1, numero+1):
+            os.system('cls' if os.name == 'nt' else 'clear')
             print(f"--- {self.titulo} - Temporada {i} ---")
             temporada = Temporada(i)
 
@@ -59,12 +30,28 @@ class Serie(Midia):
 
     def total_episodios(self):
         return sum(len(temporada) for temporada in self.temporadas)
+    
+    def status_automatico(self):
+        if sum(temporada.episodios_assistidos() for temporada in self.temporadas) == self.total_episodios():
+            self.status = "Assistido"
+            self.data_conclusao = datetime.date.today().isoformat()
+        return self.status and self.data_conclusao
+
+    def duracao_total(self):
+        self.duracao = sum(temporada.duracao() for temporada in self.temporadas)
+        return self.duracao
+    
+    def nota_total(self):
+        self.nota = sum(temporada.total_notas() for temporada in self.temporadas) / self.total_episodios()
+        return self.nota
 
         
-# Métodos Especiaisdef duracao(self):
+    # -------------------
+    # MÉTODOS ESPECIAIS
+    # -------------------
 
     def __len__(self):
         return len(self.temporadas)
     
     def __repr__(self):
-        return f"Serie {self.titulo} ({len(self.temporadas)} temporadas)"
+        return f"Serie {self.titulo} ({len(self)} temporadas)"
