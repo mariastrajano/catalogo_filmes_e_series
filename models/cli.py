@@ -161,3 +161,6 @@ class Cli:
 
                     else:
                         print("Opção Inválida!")
+
+            else:
+                print("Opção Inválida!")

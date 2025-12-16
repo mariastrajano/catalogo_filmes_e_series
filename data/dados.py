@@ -12,6 +12,7 @@ class Dados:
         self.conn = sqlite3.connect('banco.db')
         self.conn.row_factory = sqlite3.Row
         self.criar_tabelas()
+        self.seed()
 
     def criar_tabelas(self):
         c = self.conn.cursor()
@@ -183,11 +184,13 @@ class Dados:
 
         c = self.conn.cursor()
 
-        for m in midias_seed:
-            c.execute("""
-                INSERT OR IGNORE INTO midia
-                (titulo, tipo, genero, ano, duracao, nota, status, data_conclusao)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-            """, m)
+        c.execute("SELECT count(*) FROM midia")
+        if c.fetchone()[0] == 0:
+            for m in midias_seed:
+                c.execute("""
+                    INSERT OR IGNORE INTO midia
+                    (titulo, tipo, genero, ano, duracao, nota, status, data_conclusao)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                """, m)
 
-        self.conn.commit()
+            self.conn.commit()

@@ -110,7 +110,7 @@ class Usuario:
             print("Lista criada com sucesso!")
             print("")
 
-            resp = input("Deseja adicionar outra mídia? (S/N) ").upper()
+            resp = input("Deseja criar outra lista? (S/N) ").upper()
             os.system('cls' if os.name == 'nt' else 'clear')
 
             if resp == "N": 
@@ -134,6 +134,7 @@ class Usuario:
 
         midia_escolhida = self.midias[opcao - 1]
 
+        os.system('cls' if os.name == 'nt' else 'clear')
         lista_escolhida.adicionar(midia_escolhida)
 
     def remover_midia_lista(self):
@@ -154,6 +155,7 @@ class Usuario:
 
         midia_escolhida = self.midias[opcao - 1]
 
+        os.system('cls' if os.name == 'nt' else 'clear')
         lista_escolhida.remover(midia_escolhida)
 
     def listar_listas(self):
