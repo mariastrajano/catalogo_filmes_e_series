@@ -37,8 +37,7 @@ Uma etapa do projeto é realizada por semana, com os commits finais de cada sema
 
 Abaixo está o diagrama UML que representa a arquitetura do sistema, suas classes e relacionamentos:
 
-<img width="1219" height="1312" alt="Classe UML" src="https://github.com/user-attachments/assets/76d2398e-8343-4dc9-a2b2-f0751e908fc5" />
-
+<img width="1219" height="1312" alt="Classe UML (1)" src="https://github.com/user-attachments/assets/27f753b8-bb60-4763-a4aa-f7d824a9e518" />
 
 ## **Organização das Pastas**
 
